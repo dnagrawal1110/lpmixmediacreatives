@@ -84,7 +84,7 @@ export default function Hero() {
             key={s.label}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.5, delay: 0.5 + i * 0.1, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="bg-card border border-border border-t-2 border-t-primary rounded-lg p-5 text-center"
           >
             <div className="font-stat font-bold text-primary text-4xl">{s.num}</div>
