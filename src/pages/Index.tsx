@@ -1,14 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { lazy, Suspense } from "react";
+import Navbar from "@/components/landing/Navbar";
+import Hero from "@/components/landing/Hero";
+import FloatingElements from "@/components/landing/FloatingElements";
 
-const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
-};
+const TrustBar = lazy(() => import("@/components/landing/TrustBar"));
+const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
+const Services = lazy(() => import("@/components/landing/Services"));
+const HowItWorks = lazy(() => import("@/components/landing/HowItWorks"));
+const ComparisonTable = lazy(() => import("@/components/landing/ComparisonTable"));
+const Pricing = lazy(() => import("@/components/landing/Pricing"));
+const SamplePack = lazy(() => import("@/components/landing/SamplePack"));
+const Results = lazy(() => import("@/components/landing/Results"));
+const WhoItsFor = lazy(() => import("@/components/landing/WhoItsFor"));
+const FinalCTA = lazy(() => import("@/components/landing/FinalCTA"));
+const Footer = lazy(() => import("@/components/landing/Footer"));
+
+const Index = () => (
+  <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
+    <Navbar />
+    <Hero />
+    <Suspense fallback={null}>
+      <TrustBar />
+      <ProblemSection />
+      <Services />
+      <HowItWorks />
+      <ComparisonTable />
+      <Pricing />
+      <SamplePack />
+      <Results />
+      <WhoItsFor />
+      <FinalCTA />
+      <Footer />
+    </Suspense>
+    <FloatingElements />
+  </div>
+);
 
 export default Index;
