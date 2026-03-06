@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { MessageCircle } from "lucide-react";
+
+const WA_NUMBER = "919130940991";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
@@ -51,20 +54,22 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 mt-10 w-full sm:w-auto"
         >
           <a
-            href="#sample-pack"
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I want to get the ₹999 Sample Pack – 3 AI videos for my brand.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-body font-semibold text-base bg-primary text-primary-foreground px-8 py-4 rounded-lg glow-orange hover:scale-[1.03] hover:glow-orange-intense transition-all text-center min-h-[48px]"
             aria-label="Get your 999 rupee sample pack"
           >
             Get Your ₹999 Sample Pack →
           </a>
           <a
-            href="https://calendly.com/mixmedia"
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Mix Media! I'd like to book a free strategy call.")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body font-semibold text-base border border-primary text-primary px-8 py-4 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all text-center min-h-[48px]"
+            className="font-body font-semibold text-base border border-primary text-primary px-8 py-4 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all text-center min-h-[48px] inline-flex items-center justify-center gap-2"
             aria-label="Book free strategy call"
           >
-            📞 Book Free Strategy Call
+            <MessageCircle size={18} /> Book Free Strategy Call
           </a>
         </motion.div>
 
