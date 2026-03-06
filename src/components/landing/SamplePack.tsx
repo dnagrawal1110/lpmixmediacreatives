@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+const WA_NUMBER = "919130940991";
+
 const beforeItems = [
   "3 creatives/month",
   "₹50k agency fee",
@@ -19,11 +21,9 @@ export default function SamplePack() {
       id="sample-pack"
       className="section-padding bg-card border-y border-primary/20 relative overflow-hidden"
     >
-      {/* Glow border effect */}
       <div className="absolute inset-0 glow-orange-subtle pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Left */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -51,18 +51,19 @@ export default function SamplePack() {
             ))}
           </ul>
           <a
-            href="#razorpay-999"
+            href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I want to order the ₹999 Sample Pack (3 AI videos, 4-day delivery). Let's go!")}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="block w-full lg:w-auto lg:inline-block text-center font-body font-bold text-base bg-primary text-primary-foreground px-10 py-4 rounded-lg glow-orange hover:glow-orange-intense hover:scale-[1.02] transition-all min-h-[48px]"
             aria-label="Get my 999 rupee sample pack"
           >
             GET MY ₹999 SAMPLE PACK
           </a>
           <p className="font-body text-xs text-muted-foreground mt-3">
-            🔒 Secure payment via Razorpay • Instant confirmation
+            💬 Order via WhatsApp • Instant confirmation
           </p>
         </motion.div>
 
-        {/* Right — Before vs After */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -71,7 +72,6 @@ export default function SamplePack() {
           className="bg-background border border-border rounded-lg overflow-hidden"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 h-full">
-            {/* Before */}
             <div className="p-6 border-b sm:border-b-0 sm:border-r border-border bg-destructive/5">
               <h4 className="font-heading text-xl text-destructive mb-4">BEFORE</h4>
               <ul className="flex flex-col gap-3">
@@ -82,7 +82,6 @@ export default function SamplePack() {
                 ))}
               </ul>
             </div>
-            {/* After */}
             <div className="p-6 bg-success/5">
               <h4 className="font-heading text-xl text-success mb-4">AFTER</h4>
               <ul className="flex flex-col gap-3">
@@ -94,7 +93,6 @@ export default function SamplePack() {
               </ul>
             </div>
           </div>
-          {/* Arrow */}
           <div className="text-center py-3 font-heading text-2xl text-primary bg-card border-t border-border">
             → UPGRADE YOUR CREATIVE SYSTEM
           </div>

@@ -152,22 +152,22 @@ export default function VideoShowcase() {
         ))}
       </div>
 
-      {/* Portfolio CTA */}
+      {/* Request Full Portfolio CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mt-8"
+        className="mt-8 text-center"
       >
         <a
-          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Mix Media! I'd like to see your full portfolio.")}`}
+          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Mix Media! I'd like to see your full portfolio with more video samples.")}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 font-body font-semibold text-sm border border-primary text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all min-h-[48px]"
-          aria-label="Request full portfolio on WhatsApp"
+          className="inline-flex items-center gap-2 font-body font-semibold text-sm border border-primary text-primary px-8 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all min-h-[48px]"
+          aria-label="Request full portfolio"
         >
           <MessageCircle size={16} />
-          Request Full Portfolio →
+          Request Full Portfolio
         </a>
       </motion.div>
 

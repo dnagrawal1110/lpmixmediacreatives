@@ -1,21 +1,23 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
+const WA_NUMBER = "919130940991";
+
 const paths = [
   {
     icon: "🎬",
     title: "Start with ₹999",
     desc: "Get 3 AI videos, see if it works",
     cta: "Get Sample Pack →",
-    href: "#sample-pack",
+    href: `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I want to order the ₹999 Sample Pack (3 AI videos, 4-day delivery). Let's go!")}`,
     style: "bg-primary text-primary-foreground glow-orange hover:glow-orange-intense",
   },
   {
     icon: "📞",
     title: "Book a Free Call",
     desc: "30-min strategy call with Deepak",
-    cta: "Book on Calendly →",
-    href: "https://calendly.com/mixmedia",
+    cta: "Book on WhatsApp →",
+    href: `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi! I'd like to book a free strategy call with Mix Media Creatives.")}`,
     style: "border border-primary text-primary hover:bg-primary hover:text-primary-foreground",
   },
   {
@@ -23,7 +25,7 @@ const paths = [
     title: "WhatsApp Us",
     desc: "Message directly for quick questions",
     cta: "Open WhatsApp →",
-    href: "https://wa.me/91XXXXXXXXXX",
+    href: `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Mix Media! I have a quick question about your services.")}`,
     style: "bg-success text-success-foreground hover:opacity-90",
   },
 ];
@@ -31,7 +33,6 @@ const paths = [
 export default function FinalCTA() {
   return (
     <section className="section-padding relative overflow-hidden">
-      {/* Radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsla(18,100%,57%,0.08)_0%,_transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
@@ -68,8 +69,8 @@ export default function FinalCTA() {
               <p className="font-body text-muted-foreground text-sm mb-5">{p.desc}</p>
               <a
                 href={p.href}
-                target={p.href.startsWith("http") ? "_blank" : undefined}
-                rel={p.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`inline-flex items-center justify-center gap-2 font-body font-semibold text-sm px-6 py-3 rounded-lg transition-all min-h-[48px] w-full ${p.style}`}
                 aria-label={p.cta}
               >

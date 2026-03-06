@@ -1,11 +1,11 @@
+const WA_NUMBER = "919130940991";
 const services = ["AI Videos", "Static Ads", "Variations", "Strategy"];
 const company = ["About", "Portfolio", "Blog", "Careers"];
 
 export default function Footer() {
   return (
-    <footer className="bg-[hsl(0,0%,2%)] border-t border-border">
+    <footer className="bg-[hsl(0,0%,2%)] border-t border-border pb-20 lg:pb-0">
       <div className="max-w-6xl mx-auto px-5 md:px-8 py-16 grid grid-cols-2 lg:grid-cols-4 gap-10">
-        {/* Col 1 */}
         <div className="col-span-2 lg:col-span-1">
           <div className="font-heading text-xl text-foreground mb-3">
             <span>MIX MEDIA </span><span className="text-primary">CREATIVES</span>
@@ -22,7 +22,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Col 2 */}
         <div>
           <h4 className="font-heading text-sm text-foreground mb-4">SERVICES</h4>
           <ul className="flex flex-col gap-2">
@@ -32,7 +31,6 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Col 3 */}
         <div>
           <h4 className="font-heading text-sm text-foreground mb-4">COMPANY</h4>
           <ul className="flex flex-col gap-2">
@@ -42,11 +40,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Col 4 */}
         <div>
           <h4 className="font-heading text-sm text-foreground mb-4">CONTACT</h4>
           <ul className="flex flex-col gap-2 font-body text-sm text-muted-foreground">
-            <li>+91 XXXXXXXXXX</li>
+            <li><a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">+91 9130940991</a></li>
             <li>hello@mixmedia.in</li>
             <li>Pune, Maharashtra</li>
           </ul>
