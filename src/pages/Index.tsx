@@ -1,5 +1,4 @@
 import { lazy, Suspense } from "react";
-import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
 import FloatingElements from "@/components/landing/FloatingElements";
 
@@ -18,7 +17,6 @@ const Footer = lazy(() => import("@/components/landing/Footer"));
 
 const Index = () => (
   <div className="bg-background text-foreground min-h-screen overflow-x-hidden">
-    <Navbar />
     <Hero />
     <Suspense fallback={null}>
       <TrustBar />
