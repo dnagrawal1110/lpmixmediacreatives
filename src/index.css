@@ -97,7 +97,7 @@
 
 @layer components {
   .section-padding {
-    @apply px-5 py-20 md:px-8 lg:px-16 lg:py-[120px];
+    @apply px-5 py-12 md:px-8 lg:px-16 lg:py-16;
   }
   .section-divider {
     @apply w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-40;
