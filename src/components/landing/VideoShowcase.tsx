@@ -1,14 +1,16 @@
 import { useState, useRef, useCallback } from "react";
-import { Volume2, VolumeX, Play } from "lucide-react";
+import { Volume2, VolumeX, Play, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
+
+const WA_NUMBER = "919130940991";
 
 type VideoCategory = "Pattern Interrupt" | "Pixar Style" | "Promotional" | "Before/After" | "CGI" | "Animated";
 
 interface VideoItem {
   id: string;
   category: VideoCategory;
-  src: string; // placeholder — will be replaced with real URLs
+  src: string;
   poster?: string;
   aspectRatio: "9/16" | "1/1" | "4/5" | "16/9";
 }
@@ -46,7 +48,6 @@ function VideoCard({ video, isPlaying, onPlay }: { video: VideoItem; isPlaying: 
     }
   }, []);
 
-  // When another video plays, mute this one
   if (!isPlaying && videoRef.current && !videoRef.current.muted) {
     videoRef.current.muted = true;
     setMuted(true);
@@ -61,7 +62,6 @@ function VideoCard({ video, isPlaying, onPlay }: { video: VideoItem; isPlaying: 
       style={{ aspectRatio: video.aspectRatio }}
       onClick={handlePlay}
     >
-      {/* Placeholder gradient when no video src */}
       {!video.src ? (
         <div className="absolute inset-0 bg-gradient-to-br from-card via-muted to-card flex flex-col items-center justify-center gap-2">
           <Play className="w-10 h-10 text-primary opacity-60" />
@@ -80,12 +80,10 @@ function VideoCard({ video, isPlaying, onPlay }: { video: VideoItem; isPlaying: 
         />
       )}
 
-      {/* Category pill */}
       <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm border border-border rounded-full px-2.5 py-0.5">
         <span className="font-body text-[10px] text-primary font-medium">{video.category}</span>
       </div>
 
-      {/* Mute/Unmute button */}
       {video.src && (
         <button
           onClick={toggleMute}
@@ -142,7 +140,7 @@ export default function VideoShowcase() {
         ))}
       </div>
 
-      {/* Video grid — horizontal scroll on mobile, grid on desktop */}
+      {/* Video grid */}
       <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible scrollbar-hide">
         {filtered.map((video) => (
           <VideoCard
@@ -153,6 +151,25 @@ export default function VideoShowcase() {
           />
         ))}
       </div>
+
+      {/* Request Full Portfolio CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mt-8 text-center"
+      >
+        <a
+          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Hi Mix Media! I'd like to see your full portfolio with more video samples.")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 font-body font-semibold text-sm border border-primary text-primary px-8 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all min-h-[48px]"
+          aria-label="Request full portfolio"
+        >
+          <MessageCircle size={16} />
+          Request Full Portfolio
+        </a>
+      </motion.div>
 
       <div className="section-divider mt-10" />
     </section>
