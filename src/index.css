@@ -127,6 +127,17 @@
   animation-play-state: paused;
 }
 
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-fast {
+  animation: marquee 15s linear infinite;
+}
+.animate-marquee-fast-reverse {
+  animation: marquee-reverse 15s linear infinite;
+}
+
 /* Pulse dot */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }

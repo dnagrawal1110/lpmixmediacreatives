@@ -22,6 +22,7 @@ const Index = () => (
     <Hero />
     <Suspense fallback={null}>
       <TrustBar />
+      <VideoShowcase />
       <ProblemSection />
       <Services />
       <HowItWorks />

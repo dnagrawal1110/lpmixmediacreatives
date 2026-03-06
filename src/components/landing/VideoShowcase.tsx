@@ -113,7 +113,7 @@ export default function VideoShowcase() {
 
   return (
     <section className="py-10 md:py-16 px-5 md:px-8 lg:px-16">
-      <SectionHeading label="OUR WORK" heading="SCROLL-STOPPING CREATIVES" />
+      <SectionHeading label="OUR WORK" title="SCROLL-STOPPING CREATIVES" />
 
       {/* Category filter pills */}
       <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide">
