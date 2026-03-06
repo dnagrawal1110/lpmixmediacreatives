@@ -97,7 +97,7 @@
 
 @layer components {
   .section-padding {
-    @apply px-5 py-20 md:px-8 lg:px-16 lg:py-[120px];
+    @apply px-5 py-12 md:px-8 lg:px-16 lg:py-16;
   }
   .section-divider {
     @apply w-full h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-40;
@@ -125,6 +125,17 @@
 }
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-fast {
+  animation: marquee 15s linear infinite;
+}
+.animate-marquee-fast-reverse {
+  animation: marquee-reverse 15s linear infinite;
 }
 
 /* Pulse dot */
