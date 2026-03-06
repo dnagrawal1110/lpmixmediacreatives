@@ -4,6 +4,7 @@ import Hero from "@/components/landing/Hero";
 import FloatingElements from "@/components/landing/FloatingElements";
 
 const TrustBar = lazy(() => import("@/components/landing/TrustBar"));
+const VideoShowcase = lazy(() => import("@/components/landing/VideoShowcase"));
 const ProblemSection = lazy(() => import("@/components/landing/ProblemSection"));
 const Services = lazy(() => import("@/components/landing/Services"));
 const HowItWorks = lazy(() => import("@/components/landing/HowItWorks"));
