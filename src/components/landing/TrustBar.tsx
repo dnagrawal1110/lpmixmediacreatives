@@ -28,13 +28,14 @@ export default function TrustBar() {
         <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
         <div className="animate-marquee-fast flex items-center whitespace-nowrap">
           {list1.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt="Client logo"
-              className="h-10 md:h-12 w-auto object-contain mx-6 opacity-70 hover:opacity-100 transition-opacity"
-              loading="lazy"
-            />
+            <div key={i} className="mx-3 shrink-0 border border-border rounded-lg bg-card/50 px-5 py-3 flex items-center justify-center hover:border-primary/50 transition-colors">
+              <img
+                src={src}
+                alt="Client logo"
+                className="h-8 md:h-10 w-auto object-contain"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -45,13 +46,14 @@ export default function TrustBar() {
         <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
         <div className="animate-marquee-fast-reverse flex items-center whitespace-nowrap">
           {list2.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt="Client logo"
-              className="h-10 md:h-12 w-auto object-contain mx-6 opacity-70 hover:opacity-100 transition-opacity"
-              loading="lazy"
-            />
+            <div key={i} className="mx-3 shrink-0 border border-border rounded-lg bg-card/50 px-5 py-3 flex items-center justify-center hover:border-primary/50 transition-colors">
+              <img
+                src={src}
+                alt="Client logo"
+                className="h-8 md:h-10 w-auto object-contain"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       </div>
