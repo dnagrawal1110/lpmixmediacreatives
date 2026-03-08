@@ -1,113 +1,141 @@
-import { useState, useRef, useCallback } from "react";
-import { Volume2, VolumeX, Play, MessageCircle } from "lucide-react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import { Volume2, VolumeX, Play, Pause, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
 const WA_NUMBER = "919130940991";
 
-type VideoCategory = "Pattern Interrupt" | "Pixar Style" | "Promotional" | "Before/After" | "CGI" | "Animated";
+type VideoCategory = "All" | "CGI" | "Pixar Style" | "Promotional" | "Before/After" | "Animated";
 
 interface VideoItem {
   id: string;
-  category: VideoCategory;
+  category: Exclude<VideoCategory, "All">;
   src: string;
-  poster?: string;
-  aspectRatio: "9/16" | "1/1" | "4/5" | "16/9";
+  label: string;
 }
 
-// Placeholder videos — user will upload real ones
-const placeholderVideos: VideoItem[] = [
-  { id: "1", category: "Pattern Interrupt", src: "", aspectRatio: "9/16" },
-  { id: "2", category: "Pixar Style", src: "", aspectRatio: "9/16" },
-  { id: "3", category: "Promotional", src: "", aspectRatio: "1/1" },
-  { id: "4", category: "Before/After", src: "", aspectRatio: "9/16" },
-  { id: "5", category: "CGI", src: "", aspectRatio: "4/5" },
-  { id: "6", category: "Animated", src: "", aspectRatio: "9/16" },
+const videos: VideoItem[] = [
+  { id: "1", category: "CGI", src: "/videos/cgi-perfume.mp4", label: "Premium Perfume – CGI Studio" },
+  { id: "2", category: "Pixar Style", src: "/videos/pixar-skincare.mp4", label: "Skincare – Pixar Animation" },
+  { id: "3", category: "Before/After", src: "/videos/beforeafter-supplement.mp4", label: "Supplement – Before/After" },
+  { id: "4", category: "Promotional", src: "/videos/promotional-wellness.mp4", label: "Wellness – Educative UGC" },
+  { id: "5", category: "Promotional", src: "/videos/promotional-ghee.mp4", label: "Ghee – Educative Ad" },
+  { id: "6", category: "Animated", src: "/videos/ugc-haircare.mp4", label: "Haircare – UGC Style" },
+  { id: "7", category: "Promotional", src: "/videos/promotional-perfume.mp4", label: "Perfume – Promotional UGC" },
 ];
 
-const categories: VideoCategory[] = ["Pattern Interrupt", "Pixar Style", "Promotional", "Before/After", "CGI", "Animated"];
+const categories: VideoCategory[] = ["All", "CGI", "Pixar Style", "Promotional", "Before/After", "Animated"];
 
-function VideoCard({ video, isPlaying, onPlay }: { video: VideoItem; isPlaying: boolean; onPlay: (id: string) => void }) {
+function VideoCard({
+  video,
+  activeVideoId,
+  onPlay,
+}: {
+  video: VideoItem;
+  activeVideoId: string | null;
+  onPlay: (id: string | null) => void;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
+  const isActive = activeVideoId === video.id;
+  const [playing, setPlaying] = useState(false);
 
-  const handlePlay = useCallback(() => {
-    onPlay(video.id);
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      setMuted(false);
-      videoRef.current.play();
+  // When another video becomes active, pause this one
+  useEffect(() => {
+    if (!isActive && videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.muted = true;
+      videoRef.current.currentTime = 0;
+      setPlaying(false);
     }
-  }, [video.id, onPlay]);
+  }, [isActive]);
 
-  const toggleMute = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setMuted(videoRef.current.muted);
+  const handleToggle = useCallback(() => {
+    const el = videoRef.current;
+    if (!el) return;
+
+    if (isActive && playing) {
+      // Pause
+      el.pause();
+      el.muted = true;
+      setPlaying(false);
+      onPlay(null);
+    } else {
+      // Play this one (will auto-pause others via effect)
+      onPlay(video.id);
+      el.muted = false;
+      el.play().catch(() => {});
+      setPlaying(true);
     }
-  }, []);
-
-  if (!isPlaying && videoRef.current && !videoRef.current.muted) {
-    videoRef.current.muted = true;
-    setMuted(true);
-  }
+  }, [isActive, playing, video.id, onPlay]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      className="relative rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-start shrink-0 w-[220px] md:w-auto"
-      style={{ aspectRatio: video.aspectRatio }}
-      onClick={handlePlay}
+      viewport={{ once: true, margin: "-40px" }}
+      className="relative rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-start shrink-0 w-[200px] md:w-auto"
+      style={{ aspectRatio: "9/16" }}
+      onClick={handleToggle}
     >
-      {!video.src ? (
-        <div className="absolute inset-0 bg-gradient-to-br from-card via-muted to-card flex flex-col items-center justify-center gap-2">
-          <Play className="w-10 h-10 text-primary opacity-60" />
-          <span className="font-heading text-sm text-muted-foreground">{video.category}</span>
-        </div>
-      ) : (
-        <video
-          ref={videoRef}
-          src={video.src}
-          poster={video.poster}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover"
-        />
-      )}
+      <video
+        ref={videoRef}
+        src={video.src}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="w-full h-full object-cover"
+      />
 
+      {/* Category badge */}
       <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm border border-border rounded-full px-2.5 py-0.5">
         <span className="font-body text-[10px] text-primary font-medium">{video.category}</span>
       </div>
 
-      {video.src && (
+      {/* Play/Pause overlay */}
+      {!playing && (
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-full bg-primary/90 flex items-center justify-center">
+            <Play className="w-5 h-5 text-primary-foreground ml-0.5" fill="currentColor" />
+          </div>
+        </div>
+      )}
+
+      {/* Mute indicator when playing */}
+      {isActive && playing && (
         <button
-          onClick={toggleMute}
-          className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:border-primary transition-colors"
-          aria-label={muted ? "Unmute" : "Mute"}
+          onClick={(e) => e.stopPropagation()}
+          className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center"
+          aria-label="Playing with sound"
         >
-          {muted ? (
-            <VolumeX className="w-4 h-4 text-muted-foreground" />
-          ) : (
-            <Volume2 className="w-4 h-4 text-primary" />
-          )}
+          <Volume2 className="w-4 h-4 text-primary" />
         </button>
       )}
+
+      {!isActive && (
+        <button
+          className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center"
+          aria-label="Muted"
+        >
+          <VolumeX className="w-4 h-4 text-muted-foreground" />
+        </button>
+      )}
+
+      {/* Label */}
+      <div className="absolute bottom-2 left-2 right-12 bg-background/70 backdrop-blur-sm rounded px-2 py-1">
+        <span className="font-body text-[10px] text-foreground line-clamp-1">{video.label}</span>
+      </div>
     </motion.div>
   );
 }
 
 export default function VideoShowcase() {
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState<VideoCategory | null>(null);
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<VideoCategory>("All");
 
-  const filtered = activeCategory
-    ? placeholderVideos.filter((v) => v.category === activeCategory)
-    : placeholderVideos;
+  const filtered = activeCategory === "All"
+    ? videos
+    : videos.filter((v) => v.category === activeCategory);
 
   return (
     <section className="py-10 md:py-16 px-5 md:px-8 lg:px-16">
@@ -115,16 +143,6 @@ export default function VideoShowcase() {
 
       {/* Category filter pills */}
       <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide">
-        <button
-          onClick={() => setActiveCategory(null)}
-          className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-body font-medium border transition-colors ${
-            !activeCategory
-              ? "bg-primary text-primary-foreground border-primary"
-              : "bg-transparent text-muted-foreground border-border hover:border-primary/50"
-          }`}
-        >
-          All
-        </button>
         {categories.map((cat) => (
           <button
             key={cat}
@@ -140,14 +158,14 @@ export default function VideoShowcase() {
         ))}
       </div>
 
-      {/* Video grid */}
+      {/* Video grid — horizontal scroll mobile, grid desktop */}
       <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible scrollbar-hide">
         {filtered.map((video) => (
           <VideoCard
             key={video.id}
             video={video}
-            isPlaying={activeVideo === video.id}
-            onPlay={setActiveVideo}
+            activeVideoId={activeVideoId}
+            onPlay={setActiveVideoId}
           />
         ))}
       </div>
