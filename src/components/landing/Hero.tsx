@@ -19,8 +19,14 @@ export default function Hero() {
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center grain-overlay grid-bg section-padding pt-12 overflow-hidden">
       <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
-        <motion.div
+        <motion.img
           {...fadeUp(0)}
+          src={logo}
+          alt="Mix Media Creatives"
+          className="h-14 w-14 mb-6"
+        />
+        <motion.div
+          {...fadeUp(0.05)}
           className="inline-flex items-center gap-2 border border-primary/40 text-primary rounded-full px-4 py-1.5 text-xs font-body mb-8 glow-orange-subtle"
         >
           🤖 AI-Powered Creative Engine
