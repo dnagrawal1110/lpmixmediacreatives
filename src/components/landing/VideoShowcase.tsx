@@ -73,7 +73,7 @@ function VideoCard({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      className="relative rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-center shrink-0 w-[160px] sm:w-[180px] md:w-auto h-[280px] sm:h-[320px] md:h-auto"
+      className="relative rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-center shrink-0 w-[140px] sm:w-[160px] md:w-auto"
       style={{ aspectRatio: "9/16" }}
       onClick={handleToggle}
     >
