@@ -1,3 +1,5 @@
+import logo from "@/assets/logo.png";
+
 const WA_NUMBER = "919130940991";
 const services = ["AI Videos", "Static Ads", "Variations", "Strategy"];
 const company = ["About", "Portfolio", "Blog", "Careers"];
@@ -7,8 +9,9 @@ export default function Footer() {
     <footer className="bg-[hsl(0,0%,2%)] border-t border-border pb-20 lg:pb-0">
       <div className="max-w-6xl mx-auto px-5 md:px-8 py-16 grid grid-cols-2 lg:grid-cols-4 gap-10">
         <div className="col-span-2 lg:col-span-1">
-          <div className="font-heading text-xl text-foreground mb-3">
-            <span>MIX MEDIA </span><span className="text-primary">CREATIVES</span>
+          <div className="flex items-center gap-2 mb-3">
+            <img src={logo} alt="Mix Media Creatives" className="h-8 w-8" />
+            <span className="font-heading text-xl text-foreground">MIX MEDIA <span className="text-primary">CREATIVES</span></span>
           </div>
           <p className="font-body text-muted-foreground text-sm mb-4">
             We Don't Make Ads. We Make Weapons.
