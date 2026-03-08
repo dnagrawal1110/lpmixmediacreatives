@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import logo from "@/assets/logo.png";
 
 const WA_NUMBER = "919130940991";
 
