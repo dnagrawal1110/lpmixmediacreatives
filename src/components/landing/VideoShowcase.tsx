@@ -73,7 +73,7 @@ function VideoCard({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      className="relative rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-center shrink-0 w-[180px] sm:w-[200px] md:w-auto"
+      className="relative rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-center shrink-0 w-[160px] sm:w-[180px] md:w-auto h-[280px] sm:h-[320px] md:h-auto"
       style={{ aspectRatio: "9/16" }}
       onClick={handleToggle}
     >
@@ -142,7 +142,7 @@ export default function VideoShowcase() {
       <SectionHeading label="OUR WORK" title="SCROLL-STOPPING CREATIVES" />
 
       {/* Category filter pills */}
-      <div className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-hide">
+      <div className="flex gap-2 flex-wrap mb-6">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -159,7 +159,7 @@ export default function VideoShowcase() {
       </div>
 
       {/* Video grid — horizontal scroll mobile, grid desktop */}
-      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-5 px-5 md:mx-0 md:px-0">
         {filtered.map((video) => (
           <VideoCard
             key={video.id}
