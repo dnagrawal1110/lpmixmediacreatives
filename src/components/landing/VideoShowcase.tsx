@@ -138,7 +138,7 @@ export default function VideoShowcase() {
     : videos.filter((v) => v.category === activeCategory);
 
   return (
-    <section className="py-10 md:py-16 px-5 md:px-8 lg:px-16">
+    <section className="py-10 md:py-16 px-5 md:px-8 lg:px-16 overflow-hidden">
       <SectionHeading label="OUR WORK" title="SCROLL-STOPPING CREATIVES" />
 
       {/* Category filter pills */}
