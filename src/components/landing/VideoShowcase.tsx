@@ -159,7 +159,7 @@ export default function VideoShowcase() {
       </div>
 
       {/* Video grid — horizontal scroll mobile, grid desktop */}
-      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-5 px-5 md:mx-0 md:px-0">
+      <div className="flex gap-3 overflow-x-auto overflow-y-hidden snap-x snap-mandatory md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar -mx-5 px-5 md:mx-0 md:px-0">
         {filtered.map((video) => (
           <VideoCard
             key={video.id}
