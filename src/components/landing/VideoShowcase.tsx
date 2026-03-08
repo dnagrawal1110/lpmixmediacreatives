@@ -73,17 +73,17 @@ function VideoCard({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      className="relative rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-start shrink-0 w-[200px] md:w-auto"
+      className="relative rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-colors group cursor-pointer snap-center shrink-0 w-[180px] sm:w-[200px] md:w-auto"
       style={{ aspectRatio: "9/16" }}
       onClick={handleToggle}
     >
       <video
         ref={videoRef}
-        src={video.src}
+        src={`${video.src}#t=0.1`}
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         className="w-full h-full object-cover"
       />
 
@@ -159,7 +159,7 @@ export default function VideoShowcase() {
       </div>
 
       {/* Video grid — horizontal scroll mobile, grid desktop */}
-      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible scrollbar-hide">
+      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible no-scrollbar" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
         {filtered.map((video) => (
           <VideoCard
             key={video.id}
