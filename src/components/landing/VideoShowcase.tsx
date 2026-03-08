@@ -38,6 +38,34 @@ function VideoCard({
   const videoRef = useRef<HTMLVideoElement>(null);
   const isActive = activeVideoId === video.id;
   const [playing, setPlaying] = useState(false);
+  const [poster, setPoster] = useState<string>("");
+
+  // Generate poster from first frame
+  useEffect(() => {
+    const vid = document.createElement("video");
+    vid.crossOrigin = "anonymous";
+    vid.muted = true;
+    vid.playsInline = true;
+    vid.preload = "auto";
+    vid.src = `${video.src}#t=0.5`;
+    const onSeeked = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        canvas.width = vid.videoWidth || 360;
+        canvas.height = vid.videoHeight || 640;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+          setPoster(canvas.toDataURL("image/jpeg", 0.7));
+        }
+      } catch {}
+      vid.removeEventListener("seeked", onSeeked);
+      vid.src = "";
+    };
+    vid.addEventListener("seeked", onSeeked);
+    vid.addEventListener("loadeddata", () => { vid.currentTime = 0.5; });
+    return () => { vid.src = ""; };
+  }, [video.src]);
 
   // When another video becomes active, pause this one
   useEffect(() => {
@@ -54,13 +82,11 @@ function VideoCard({
     if (!el) return;
 
     if (isActive && playing) {
-      // Pause
       el.pause();
       el.muted = true;
       setPlaying(false);
       onPlay(null);
     } else {
-      // Play this one (will auto-pause others via effect)
       onPlay(video.id);
       el.muted = false;
       el.play().catch(() => {});
@@ -77,14 +103,18 @@ function VideoCard({
       style={{ aspectRatio: "9/16" }}
       onClick={handleToggle}
     >
+      {/* Poster image for instant thumbnail */}
+      {poster && !playing && (
+        <img src={poster} alt={video.label} className="absolute inset-0 w-full h-full object-cover z-0" />
+      )}
       <video
         ref={videoRef}
-        src={`${video.src}#t=0.1`}
+        src={video.src}
         muted
         loop
         playsInline
-        preload="auto"
-        className="w-full h-full object-cover"
+        preload="none"
+        className={`w-full h-full object-cover ${playing ? 'relative z-0' : 'opacity-0 absolute inset-0'}`}
       />
 
       {/* Category badge */}
